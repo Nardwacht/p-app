@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		004B5D131C1B47470094FF92 /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B5D121C1B47470094FF92 /* Threading.swift */; settings = {ASSET_TAGS = (); }; };
+		004B5D151C1B51B80094FF92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B5D141C1B51B80094FF92 /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		005A81901C19BA4500E5EB08 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 005A818F1C19BA4500E5EB08 /* Podfile */; };
 		00A5A5841C1AD676009EFC02 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */; };
 		C80642351C118DA20031EC79 /* listViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80642341C118DA20031EC79 /* listViewController.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		004B5D121C1B47470094FF92 /* Threading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Threading.swift; sourceTree = "<group>"; };
+		004B5D141C1B51B80094FF92 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		005A818F1C19BA4500E5EB08 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		684FC88CB7571EB721CE9A94 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				C80642361C119AEB0031EC79 /* Scripts */,
 				C8BAD1FF1C105BA200E3CA82 /* MKVController.swift */,
 				C80642341C118DA20031EC79 /* listViewController.swift */,
+				004B5D141C1B51B80094FF92 /* LoginViewController.swift */,
 				C8BAD1EB1C1054CA00E3CA82 /* Main.storyboard */,
 				C8BAD1EE1C1054CA00E3CA82 /* Assets.xcassets */,
 				C8BAD1F01C1054CA00E3CA82 /* LaunchScreen.storyboard */,
@@ -267,6 +270,7 @@
 				C80642351C118DA20031EC79 /* listViewController.swift in Sources */,
 				C806423A1C119B1E0031EC79 /* position.swift in Sources */,
 				C80642481C119C250031EC79 /* AccountSession.swift in Sources */,
+				004B5D151C1B51B80094FF92 /* LoginViewController.swift in Sources */,
 				C8BAD1E81C1054CA00E3CA82 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

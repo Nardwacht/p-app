@@ -17,8 +17,6 @@ import CoreMotion
 import Alamofire
 
 class MKVController: UIViewController {
-        let apphandler : AppHandler = AppHandler()
-    var allPlanes = [Plane]()
  
     @IBOutlet weak var MapOutlet: MKMapView!
     
@@ -36,12 +34,7 @@ class MKVController: UIViewController {
     
 
     @IBAction func terugKnop(sender: AnyObject) {
-        { AppHandler.loadAllMyPlanes() } ~> {
-            var cc : Int = AppHandler.getAllPlanes().count - 1
-            for index in 0...cc {
-                print("VLIEGTUIG \(index + 1): naam \(AppHandler.getAllPlanes()[index].userDisplayName), titel \(AppHandler.getAllPlanes()[index].titel)")
-            }
-        }
+
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }

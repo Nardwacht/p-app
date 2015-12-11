@@ -14,9 +14,18 @@ class listViewController: UIViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func LoadPlanes(){
+        { AppHandler.loadAllMyPlanes() } ~> {
+            var cc : Int = AppHandler.getAllPlanes().count - 1
+            for index in 0...cc {
+                print("VLIEGTUIG \(index + 1): naam \(AppHandler.getAllPlanes()[index].userDisplayName), titel \(AppHandler.getAllPlanes()[index].titel)")
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        LoadPlanes()
         // Do any additional setup after loading the view.
     }
 
