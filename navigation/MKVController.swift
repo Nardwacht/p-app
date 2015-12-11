@@ -25,12 +25,7 @@ class MKVController: UIViewController {
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         super.viewDidLoad()
-        
-        allPlanes = apphandler.getAllMyPlanes()
-        
-        for index in 0...1{
-            print(allPlanes[index].userDisplayName)
-        }
+    
         
     }
 
@@ -41,7 +36,14 @@ class MKVController: UIViewController {
     
 
     @IBAction func terugKnop(sender: AnyObject) {
+        { AppHandler.loadAllMyPlanes() } ~> {
+            var cc : Int = AppHandler.getAllPlanes().count - 1
+            for index in 0...cc {
+                print("VLIEGTUIG \(index + 1): naam \(AppHandler.getAllPlanes()[index].userDisplayName), titel \(AppHandler.getAllPlanes()[index].titel)")
+            }
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     /*
     // MARK: - Navigation

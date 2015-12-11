@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		004B5D131C1B47470094FF92 /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B5D121C1B47470094FF92 /* Threading.swift */; settings = {ASSET_TAGS = (); }; };
 		005A81901C19BA4500E5EB08 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 005A818F1C19BA4500E5EB08 /* Podfile */; };
 		00A5A5841C1AD676009EFC02 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */; };
 		C80642351C118DA20031EC79 /* listViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80642341C118DA20031EC79 /* listViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		004B5D121C1B47470094FF92 /* Threading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Threading.swift; sourceTree = "<group>"; };
 		005A818F1C19BA4500E5EB08 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		684FC88CB7571EB721CE9A94 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */,
+				004B5D121C1B47470094FF92 /* Threading.swift */,
 				005A818F1C19BA4500E5EB08 /* Podfile */,
 				C8BAD1F91C10594400E3CA82 /* CoreLocation.framework */,
 				C8BAD1E61C1054CA00E3CA82 /* navigation */,
@@ -257,6 +260,7 @@
 				C806424B1C119C250031EC79 /* PreviousLocation.swift in Sources */,
 				C8BAD1EA1C1054CA00E3CA82 /* ViewController.swift in Sources */,
 				00A5A5841C1AD676009EFC02 /* SwiftyJSON.swift in Sources */,
+				004B5D131C1B47470094FF92 /* Threading.swift in Sources */,
 				C80642491C119C250031EC79 /* AppHandler.swift in Sources */,
 				C806424A1C119C250031EC79 /* DatabaseMediator.swift in Sources */,
 				C80642381C119B0A0031EC79 /* plane.swift in Sources */,

@@ -16,10 +16,16 @@ import CoreMotion
 
 class ViewController: UIViewController {
     
+    
+    let appHandler : AppHandler = AppHandler()
 
         
     override func viewDidLoad() {
 
+    }
+    
+    func printPlanes(){
+        print(AppHandler.getAllPlanes().count)
     }
 
     override func didReceiveMemoryWarning() {
