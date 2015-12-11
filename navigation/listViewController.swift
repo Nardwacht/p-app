@@ -15,10 +15,10 @@ class listViewController: UIViewController {
     }
     
     func LoadPlanes(){
-        { AppHandler.loadAllMyPlanes() } ~> {
-            var cc : Int = AppHandler.getAllPlanes().count - 1
+        { AppHandler.loadAllUserPlanes(2) } ~> {
+            var cc : Int = AppHandler.getAllMyPlanes().count - 1
             for index in 0...cc {
-                print("VLIEGTUIG \(index + 1): naam \(AppHandler.getAllPlanes()[index].userDisplayName), titel \(AppHandler.getAllPlanes()[index].titel)")
+                print("VLIEGTUIG \(index + 1): naam \(AppHandler.getAllMyPlanes()[index].userDisplayName), titel \(AppHandler.getAllMyPlanes()[index].titel)")
             }
         }
     }

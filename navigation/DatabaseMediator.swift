@@ -19,17 +19,17 @@ class DatabaseMediator{
         
     }
     
-
+    /**
+    * Function call API "getAllPlanes.php"
+    * Paramters:
+    */
     
     func getAllPlanes(completionHandler: (JSON?, NSError?) -> ()) {
-        
         _GetAllPlanes(completionHandler)
-        
     }
     
     func _GetAllPlanes(completionHandler: (JSON?, NSError?) -> ()) {
-        //let id = 3
-        var json : JSON = JSON("iets")
+        var json : JSON = JSON("empty")
         
         let url = APIurl + "getAllPlanes.php"
         Alamofire.request(.GET, url).responseJSON { response in
@@ -37,11 +37,24 @@ class DatabaseMediator{
         }
     }
     
-    func getPlanesFromUser(accountID : Int) -> [Plane]{
-        var planes = [Plane]()
+    /**
+    * Function call API "getAllPlanes.php"
+    * Paramters: accountID
+    */
     
-        return planes
+    func getPlanesFromUser(accountID : Int, completionHandler: (JSON?, NSError?) -> ()) {
+        _GetPlanesFromUser(accountID, completionHandler: completionHandler)
     }
+    
+    func _GetPlanesFromUser(accountID : Int, completionHandler: (JSON?, NSError?) -> ()) {
+        var json : JSON = JSON("empty")
+        
+        let url = APIurl + "getAllPlanes.php?accountID=\(accountID)"
+        Alamofire.request(.GET, url).responseJSON { response in
+            completionHandler(JSON(response.result.value!), response.result.error)
+        }
+    }
+    
     
     func updateAccount(acccount : AccountSession) -> Bool {
         
@@ -82,8 +95,6 @@ class DatabaseMediator{
     
     func getAllPreviousLocations(planeid : Int) -> [PreviousLocation] {
         var prevlocations = [PreviousLocation]()
-        
- 
         
         return prevlocations
     }
