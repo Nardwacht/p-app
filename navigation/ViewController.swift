@@ -15,9 +15,11 @@ import CoreLocation
 import CoreMotion
 
 class ViewController: UIViewController {
+    
+
         
     override func viewDidLoad() {
-        
+
     }
 
     override func didReceiveMemoryWarning() {

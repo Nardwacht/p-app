@@ -17,7 +17,8 @@ import CoreMotion
 import Alamofire
 
 class MKVController: UIViewController {
-    
+        let apphandler : AppHandler = AppHandler()
+    var allPlanes = [Plane]()
  
     @IBOutlet weak var MapOutlet: MKMapView!
     
@@ -25,49 +26,13 @@ class MKVController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         super.viewDidLoad()
         
+        allPlanes = apphandler.getAllMyPlanes()
         
-        
-        let id = 3
-        
-        
-        
-        let url = "http://noijdevelopment.nl/Papp/API/getPreviousLocation.php"
-        Alamofire.request(.GET, url, parameters: ["planeID": id]).responseJSON { response in
-            switch response.result {
-            case .Success(let data):
-                let json = JSON(data)
-                
-                
-                
-                for index in 0...json["response"]["list"].count - 2 {
-                    
-                    let planeID = String(json["response"]["list"][index]["planeID"])
-                    let hLat = String(json["response"]["list"][index]["locationLat"])
-                    let hLong = String(json["response"]["list"][index]["locationLong"])
-                    let degree = String(json["response"]["list"][index]["rotation"])
-                    
-                    
-                }
-                
-                
-                
-            case .Failure(let error):
-                print(error)
-            }
+        for index in 0...1{
+            print(allPlanes[index].userDisplayName)
         }
-
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

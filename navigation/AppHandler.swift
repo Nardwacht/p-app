@@ -13,6 +13,7 @@ class AppHandler{
     static var accountSession : AccountSession = AccountSession(displayname: "none", email: "none", password: "none")
     
     
+    
     init(){
         
     }
@@ -37,7 +38,8 @@ class AppHandler{
     
     func getAllMyPlanes() -> [Plane] {
         var allmyPlanes = [Plane]()
-        
+        allmyPlanes = DatabaseMediator.instance.getAllPlanes()
+
         return allmyPlanes
     }
     
