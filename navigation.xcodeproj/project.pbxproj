@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		005A81901C19BA4500E5EB08 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 005A818F1C19BA4500E5EB08 /* Podfile */; settings = {ASSET_TAGS = (); }; };
+		00A5A5841C1AD676009EFC02 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
 		C80642351C118DA20031EC79 /* listViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80642341C118DA20031EC79 /* listViewController.swift */; };
 		C80642381C119B0A0031EC79 /* plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80642371C119B0A0031EC79 /* plane.swift */; };
 		C806423A1C119B1E0031EC79 /* position.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80642391C119B1E0031EC79 /* position.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		005A818F1C19BA4500E5EB08 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		684FC88CB7571EB721CE9A94 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC24E3308BA3E495BB60898 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9FE6698D7C2991585CA35DB2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		C8BAD1DB1C1054CA00E3CA82 = {
 			isa = PBXGroup;
 			children = (
+				00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */,
 				005A818F1C19BA4500E5EB08 /* Podfile */,
 				C8BAD1F91C10594400E3CA82 /* CoreLocation.framework */,
 				C8BAD1E61C1054CA00E3CA82 /* navigation */,
@@ -254,6 +257,7 @@
 				C8BAD2001C105BA200E3CA82 /* MKVController.swift in Sources */,
 				C806424B1C119C250031EC79 /* PreviousLocation.swift in Sources */,
 				C8BAD1EA1C1054CA00E3CA82 /* ViewController.swift in Sources */,
+				00A5A5841C1AD676009EFC02 /* SwiftyJSON.swift in Sources */,
 				C80642491C119C250031EC79 /* AppHandler.swift in Sources */,
 				C806424A1C119C250031EC79 /* DatabaseMediator.swift in Sources */,
 				C80642381C119B0A0031EC79 /* plane.swift in Sources */,
