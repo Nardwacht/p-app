@@ -25,6 +25,7 @@ import Foundation
 // MARK: - Error
 
 ///Error domain
+// groetjes Marco
 public let ErrorDomain: String! = "SwiftyJSONErrorDomain"
 
 ///Error code

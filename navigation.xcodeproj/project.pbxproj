@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		005A81901C19BA4500E5EB08 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 005A818F1C19BA4500E5EB08 /* Podfile */; settings = {ASSET_TAGS = (); }; };
-		00A5A5841C1AD676009EFC02 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
+		005A81901C19BA4500E5EB08 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 005A818F1C19BA4500E5EB08 /* Podfile */; };
+		00A5A5841C1AD676009EFC02 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5A5831C1AD676009EFC02 /* SwiftyJSON.swift */; };
 		C80642351C118DA20031EC79 /* listViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80642341C118DA20031EC79 /* listViewController.swift */; };
 		C80642381C119B0A0031EC79 /* plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80642371C119B0A0031EC79 /* plane.swift */; };
 		C806423A1C119B1E0031EC79 /* position.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80642391C119B1E0031EC79 /* position.swift */; };
@@ -165,7 +165,6 @@
 				TargetAttributes = {
 					C8BAD1E31C1054CA00E3CA82 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = T5LVC48S5N;
 					};
 				};
 			};
@@ -376,6 +375,7 @@
 			baseConfigurationReference = 9FE6698D7C2991585CA35DB2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = navigation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -389,6 +389,7 @@
 			baseConfigurationReference = 8DC24E3308BA3E495BB60898 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = navigation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
