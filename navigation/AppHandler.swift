@@ -38,7 +38,7 @@ class AppHandler{
     
     func getAllMyPlanes() -> [Plane] {
         var allmyPlanes = [Plane]()
-        allmyPlanes = DatabaseMediator.instance.getAllPlanes()
+        //allmyPlanes = DatabaseMediator.instance.getAllPlanes()
 
         return allmyPlanes
     }
