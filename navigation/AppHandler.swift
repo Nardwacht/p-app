@@ -13,6 +13,8 @@ class AppHandler{
     static var accountSession : AccountSession = AccountSession(displayname: "none", email: "none", password: "none")
     static var allPlanes = [Plane]()
     static var allMyPlanes = [Plane]()
+    static var prevLocOfPlanes = [PreviousLocation]()
+    static var succesRegister = false
     
     init(){
         
@@ -26,22 +28,117 @@ class AppHandler{
         return self.allMyPlanes
     }
     
-    func register(name : String, email : String, pass : String) -> Bool{
-        
-        let session : AccountSession = AccountSession(accountid: 1, displayname: name, email: email, password: pass, experience: 0, level: 1)
-    
-        return DatabaseMediator.instance.registerAccount(session)
+    static func getPreviousLocations() -> [PreviousLocation] {
+        return self.prevLocOfPlanes
     }
     
-    func login(email : String, pass : String) -> Bool{
-        AppHandler.accountSession = DatabaseMediator.instance.login(email, password: pass)
+    static func tryRegister(name : String, email : String, pass : String) {
         
-        return AppHandler.accountSession.getAccountID() != 0
+        var doneBool : Bool = false
+        var newAccount : AccountSession = AccountSession(accountid: 0, displayname: name, email: email, password: pass, experience: 0, level: 0)
+        
+        DatabaseMediator.instance.registerAccount(newAccount) { responseObject, error in
+            
+            let json : JSON = responseObject!
+            var accountFound : AccountSession = self.accountSession
+            
+            for index in 0...json["response"]["list"].count - 1 {
+                
+                let check : Int? = Int(String(json["response"]["list"][index]["succes"]))
+                
+                if (check == 1){
+                    succesRegister = true;
+                }
+                
+                
+            }
+            
+            doneBool = true
+            return
+        }
+        
+        while(!doneBool){
+            
+        }
+    }
+    
+     static func tryLogin(email : String, pass : String){
+        var doneBool : Bool = false
+        
+        DatabaseMediator.instance.loginAccount(email, password: pass) { responseObject, error in
+            print(responseObject)
+            
+            let json : JSON = responseObject!
+            var accountFound : AccountSession = self.accountSession
+            
+            for index in 0...json["response"]["list"].count - 1 {
+                
+                let accountid : Int? = Int(String(json["response"]["list"][index]["accountID"]))
+                let displayname : String = String(json["response"]["list"][index]["displayName"])
+                let email : String = String(json["response"]["list"][index]["email"])
+                let password : String = String(json["response"]["list"][index]["password"])
+                let experience : Int64? = Int64(String(json["response"]["list"][index]["experience"]))
+                let level : Int? = Int(String(json["response"]["list"][index]["level"]))
+                
+                
+                self.accountSession = AccountSession(accountid: accountid!, displayname: displayname, email: email, password: password, experience: experience!, level: level!)
+                
+                
+            }
+            
+            doneBool = true
+            return
+        }
+        
+        while(!doneBool){
+            
+        }
     }
     
     func throwNewPlane(startposition : Position, message : String, degrees : Float, speed : Float) -> Bool{
         
         return false
+    }
+    
+    static func loadAllPreviousLocations(planeID : Int){
+        var doneBool : Bool = false
+        
+        DatabaseMediator.instance.GetAllPreviousLocations(planeID) { responseObject, error in
+            print(responseObject)
+            
+            let json : JSON = responseObject!
+            
+            for index in 0...json["response"]["list"].count - 1 {
+                
+                let locID : Int? = Int(String(json["response"]["list"][index]["locID"]))
+                let planeID : Int? = Int(String(json["response"]["list"][index]["planeID"]))
+                let long : Float? = Float(String(json["response"]["list"][index]["long"]))
+                let lat : Float? = Float(String(json["response"]["list"][index]["lat"]))
+                let rotation : Int? = Int(String(json["response"]["list"][index]["rotation"]))
+                let throwDate : String = String(json["response"]["list"][index]["date"])
+
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let nsthrowDate : NSDate? = dateFormatter.dateFromString( throwDate )
+                
+
+                let position : Position = Position(long: long!, lat: lat!)
+                
+                
+                self.prevLocOfPlanes.append(PreviousLocation(locid: locID!, planeid: planeID!, date: nsthrowDate!, pos: position, rotation: rotation!))
+                
+                
+            }
+            
+            doneBool = true
+            return
+        }
+        
+        while(!doneBool){
+            
+        }
+
     }
     
     static func loadAllUserPlanes(accountID : Int) {
