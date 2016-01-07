@@ -19,9 +19,11 @@ class Plane{
     var amountOfThrows : Int
     var titel :  String
     var active : Bool
+    var isFlying :  Bool
     var currentPosition : Position
+    var hRotation : Int
     
-    init(planeid : Int, userid : Int, message : String, userdisplayname: String, throwdate : NSDate, totalscore : Int, aot  : Int, titel : String, active : Bool, currentpos : Position){
+    init(planeid : Int, userid : Int, message : String, userdisplayname: String, throwdate : NSDate, totalscore : Int, aot  : Int, titel : String, active : Bool, isflying : Bool, rot: Int, currentpos : Position){
         planeID = planeid
         userID = userid
         self.message = message
@@ -31,7 +33,9 @@ class Plane{
         self.titel = titel
         self.active = active
         currentPosition = currentpos
-        amountOfThrows = aot;
+        amountOfThrows = aot
+        isFlying = isflying
+        hRotation = rot
     }
     
     func addToTotalScore(amount : Int) -> Int {
