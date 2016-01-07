@@ -10,27 +10,18 @@ import Foundation
 
 class AppHandler{
     
-    static var accountSession : AccountSession = AccountSession(displayname: "none", email: "none", password: "none")
+    static var accountSession : AccountSession = AccountSession(accountid: 1, displayname: "johnsnow", email: "john@snow.snow", password: "none", experience: 1337, level: 12)
     static var allPlanes = [Plane]()
     static var allMyPlanes = [Plane]()
     static var prevLocOfPlanes = [PreviousLocation]()
     static var succesRegister = false
+    static var response : String = "none"
     
     init(){
         
     }
     
-    static func getAllPlanes() -> [Plane] {
-        return self.allPlanes
-    }
     
-    static func getAllMyPlanes() -> [Plane] {
-        return self.allMyPlanes
-    }
-    
-    static func getPreviousLocations() -> [PreviousLocation] {
-        return self.prevLocOfPlanes
-    }
     
     static func tryRegister(name : String, email : String, pass : String) {
         
@@ -95,9 +86,26 @@ class AppHandler{
         }
     }
     
-    func throwNewPlane(startposition : Position, message : String, degrees : Float, speed : Float) -> Bool{
+    
+    static func throwNewPlane(startposition : Position, titel : String, message : String, degrees : Int) {
+        var doneBool : Bool = false;
         
-        return false
+        DatabaseMediator.instance.addPaperPlane(self.accountSession.getAccountID(), scoreTotal: 0, title: titel, content: message, userDisplayName: self.accountSession.getDisplayName(), amountOfThrows: 1, hlat: startposition.getLat(), hlong: startposition.getLong(), hrot: degrees, inair: 1, active: 1) { responseObject, error in
+            print(responseObject)
+            
+            let json : JSON = responseObject!
+                
+                let workedMessage : String? = String(json["response"]["check"])
+            self.response = workedMessage!
+            
+            doneBool = true
+            return
+        }
+        
+        while(!doneBool){
+            
+        }
+
     }
     
     static func loadAllPreviousLocations(planeID : Int){

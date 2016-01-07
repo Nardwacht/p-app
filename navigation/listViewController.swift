@@ -15,11 +15,9 @@ class listViewController: UIViewController {
     }
     
     func LoadPlanes(){
-        { AppHandler.loadAllUserPlanes(2) } ~> {
-            var cc : Int = AppHandler.getAllMyPlanes().count - 1
-            for index in 0...cc {
-                print("VLIEGTUIG \(index + 1): naam \(AppHandler.getAllMyPlanes()[index].userDisplayName), titel \(AppHandler.getAllMyPlanes()[index].titel)")
-            }
+        { AppHandler.throwNewPlane(Position(long: 2.5, lat: 2.5), titel: "swagtitel", message: "/swag message\\. yolo, komma?vraagteken", degrees: 50) } ~> {
+
+            print(AppHandler.response)
         }
     }
     

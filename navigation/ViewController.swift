@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     }
     
     func printPlanes(){
-        print(AppHandler.getAllPlanes().count)
+        //print(AppHandler.getAllPlanes().count)
     }
 
     override func didReceiveMemoryWarning() {

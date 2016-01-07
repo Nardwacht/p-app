@@ -14,6 +14,7 @@ class DatabaseMediator{
     
     static var instance = DatabaseMediator();
     var APIurl : String = "http://noijdevelopment.nl/Papp/API/"
+
     
     init(){
         
@@ -50,6 +51,27 @@ class DatabaseMediator{
         var json : JSON = JSON("empty")
 
         let url = APIurl + "getAllPlanes.php?accountID=\(accountID)"
+        Alamofire.request(.GET, url).responseJSON { response in
+            completionHandler(JSON(response.result.value!), response.result.error)
+        }
+    }
+    
+    /**
+    * Function call API "addPaperPlane.php + accID, scoreTotal, title, content, userDisplayName, amountOfThrows, hLat, hLong, hRotation, inAir, active
+    * Paramters: accountID
+    */
+    
+    func addPaperPlane(accountID : Int, scoreTotal : Int, title : String, content : String, userDisplayName : String, amountOfThrows : Int, hlat : Float, hlong : Float, hrot : Int, inair : Int, active : Int, completionHandler: (JSON?, NSError?) -> ()) {
+        _AddPaperPlane(accountID, scoreTotal: scoreTotal, title: title, content: content, userDisplayName: userDisplayName, amountOfThrows: amountOfThrows, hlat: hlat, hlong: hlong, hrot: hrot, inair: inair, active: active, completionHandler: completionHandler)
+    }
+    
+    func _AddPaperPlane(accountID : Int, scoreTotal : Int, title : String, content : String, userDisplayName : String, amountOfThrows : Int, hlat : Float, hlong : Float, hrot : Int, inair : Int, active : Int, completionHandler: (JSON?, NSError?) -> ()) {
+        
+        var json : JSON = JSON("empty")
+        var escapemsg : String = content
+        escapemsg = escapemsg.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        let url = APIurl + "addPaperPlane.php?accountID=\(accountID)&scoreTotal=\(scoreTotal)&title=\(title)&content=\(escapemsg)&userDisplayName=\(userDisplayName)&amountOfThrows=\(amountOfThrows)&hLat=\(hlat)&hLong=\(hlong)&hRotation=\(hrot)&inAir=\(inair)&active=\(active)"
+        print(url) 
         Alamofire.request(.GET, url).responseJSON { response in
             completionHandler(JSON(response.result.value!), response.result.error)
         }
