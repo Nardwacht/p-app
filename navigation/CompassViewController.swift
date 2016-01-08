@@ -36,10 +36,12 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     var currentLat: Double = 0.0
     var currentLon: Double = 0.0
     var previousDegrees: Double = 0.0
+    var currentDegrees: Double = 0.0
     var locked: Bool = false
     var forceTimer: NSTimer!
     var currentForce: Int = 0
     var forceUp: Bool = true
+    var firstRun: Bool = true
     var planeLocation: CGPoint = CGPoint(x: 0, y: 0)
     var initY: CGFloat = 0
     var startTime: CFAbsoluteTime = 0
@@ -82,7 +84,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
             
             let speed = (CFAbsoluteTimeGetCurrent() - startTime) * 2.5
             
-            print(speed)
+            //print(speed)
             
             if speed < 0.5 {
                 
@@ -94,7 +96,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
                         
                         
                         
-                        print("klaar is kees")
+                        //print("klaar is kees")
                         let refreshAlert = UIAlertController(title: "Verstuurd!", message: "Je vliegtuigje is verstuurd", preferredStyle: UIAlertControllerStyle.ActionSheet)
                         
                         refreshAlert.addAction(UIAlertAction(title: "Doorgaan", style: .Default, handler: { (action: UIAlertAction!) in
@@ -103,17 +105,21 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
                             self.unlocked()
                             
                             
+                            
+                            
                         }))
                         
+                        self.throwPlane(self.currentLat, long1: self.currentLon, d: Double(self.currentForce), angle: self.currentDegrees, titel: "Titeltestje", message: "Messagetestje")
+                        
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewControllerWithIdentifier("startScherm") as! UIViewController
+                        let vc = storyboard.instantiateViewControllerWithIdentifier("startScherm")
                         self.presentViewController(vc, animated: true, completion: nil)
 
                         
                         
                 })
                 
-                print("Voert einde uit")
+                //print("Voert einde uit")
                 
             }
                 
@@ -142,7 +148,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(planeImage.center.y)
+        //print(planeImage.center.y)
         
         initY = planeImage.center.y
         
@@ -165,7 +171,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
         
         
         self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
@@ -178,13 +184,53 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
             longitude: self.currentLon, zoom: 7, bearing: 30, viewingAngle: 0)
         
         mapView.camera = camera
+        mapView.userInteractionEnabled = false
         mapView.mapType = kGMSTypeNormal
         mapView.myLocationEnabled = true
         
         
     }
     
+    func throwPlane(lat1: Double,long1: Double,d: Double,angle: Double, titel: String, message: String){
+        
+        {
+            
+            let R = 6378.14
+            
+            let dist = d * 10
+            
+            //# Degree to Radian
+            let latitude1 = lat1 * (M_PI/180)
+            let longitude1 = long1 * (M_PI/180)
+            let brng = angle * (M_PI/180)
+            
+            var latitude2 = asin(sin(latitude1)*cos(dist/R) + cos(latitude1)*sin(dist/R)*cos(brng))
+            var longitude2 = longitude1 + atan2(sin(brng)*sin(dist/R)*cos(latitude1),cos(dist/R)-sin(latitude1)*sin(latitude2))
+            
+            //# back to degrees
+            latitude2 = latitude2 * (180/M_PI)
+            longitude2 = longitude2 * (180/M_PI)
+            
+            //# 6 decimal for Leaflet and other system compatibility
+            let lat2 = Double(round(1000000*latitude2)/1000000)
+            let long2 = Double(round(1000000*longitude2)/1000000)
+            
+            print(dist)
+            print(angle)
+            
+            
+            AppHandler.throwNewPlane(Position(long: Float(long2), lat: Float(lat2)), titel: "swagtitel", message: "/swag message\\. yolo, komma?vraagteken", degrees: Int(angle)) } ~> {
+                
+                //print(AppHandler.response)
+        }
+        
+    }
+    
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        
+        if(self.firstRun == true){
+            
+        self.firstRun = false
         
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: { (placemarks, error) ->
             Void in
@@ -205,7 +251,11 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
                 
             }
             
+            
+            
         })
+            
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
@@ -217,6 +267,8 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
             let newDegrees = CGFloat(degrees) / 180.0 * CGFloat(M_PI)
             
             self.mapView.animateToBearing(degrees)
+            
+            self.currentDegrees = degrees
             
             UIView.animateWithDuration(0.3, delay: 0.1, options: .CurveEaseOut, animations: {
                 

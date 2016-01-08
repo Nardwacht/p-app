@@ -16,6 +16,8 @@ import CoreMotion
 
 import QuartzCore
 
+import Darwin
+
 class ViewController: UIViewController {
         
     @IBOutlet weak var rightButton: UIButton!
@@ -29,6 +31,9 @@ class ViewController: UIViewController {
     var up: Bool = false
     
     override func viewDidLoad() {
+        
+        
+        get_gps_distance(51.316699, long1: 5.619299, d: 1, angle: 90)
         
 
         titleField.addTarget(self, action: "textFieldDidReturn:", forControlEvents: .EditingDidEndOnExit)
@@ -75,6 +80,39 @@ class ViewController: UIViewController {
         
         
     }
+    
+    
+    
+    func get_gps_distance(lat1: Double,long1: Double,d: Double,angle: Double)
+    {
+        
+        let R = 6378.14
+        
+        //# Degree to Radian
+        let latitude1 = lat1 * (M_PI/180)
+        let longitude1 = long1 * (M_PI/180)
+        let brng = angle * (M_PI/180)
+        
+        var latitude2 = asin(sin(latitude1)*cos(d/R) + cos(latitude1)*sin(d/R)*cos(brng))
+        var longitude2 = longitude1 + atan2(sin(brng)*sin(d/R)*cos(latitude1),cos(d/R)-sin(latitude1)*sin(latitude2))
+        
+        //# back to degrees
+        latitude2 = latitude2 * (180/M_PI)
+        longitude2 = longitude2 * (180/M_PI)
+        
+        //# 6 decimal for Leaflet and other system compatibility
+        let lat2 = Double(round(1000000*latitude2)/1000000)
+        let long2 = Double(round(1000000*longitude2)/1000000)
+        
+        //print(lat2)
+        //print(long2)
+
+    }
+    
+    
+    
+    
+    
     
     func DismissKeyboard(){
         view.endEditing(true)

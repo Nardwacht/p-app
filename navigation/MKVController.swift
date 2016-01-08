@@ -21,6 +21,7 @@ class MKVController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     var currentLat: Double = 0.0
     var currentLon: Double = 0.0
     var firstLoop: Bool = true
+    var firstRun: Bool = true
     var path: GMSMutablePath = GMSMutablePath()
     var polyline: GMSPolyline = GMSPolyline()
     
@@ -28,6 +29,7 @@ class MKVController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         
         self.locationManager.delegate = self
@@ -53,25 +55,26 @@ class MKVController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         
         showAllMarkers()
         
-        throwPlane()
+        
+        var nav = self.navigationController?.navigationBar
+
+        nav?.barTintColor = UIColor(red: 64.0/255.0, green: 164.0/255.0, blue: 218.0/255.0, alpha: 1.0)
+        nav?.tintColor = UIColor.whiteColor()
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+
+        
         
         
         
     }
     
     
-    func throwPlane(){
-        
-        {
-        
-        AppHandler.throwNewPlane(Position(long: 2.5, lat: 2.5), titel: "swagtitel", message: "/swag message\\. yolo, komma?vraagteken", degrees: 50) } ~> {
-    
-        print(AppHandler.response)
-    }
-    
-    }
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        
+        if(self.firstRun == true){
+            
+            self.firstRun = false
         
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: { (placemarks, error) ->
             Void in
@@ -98,6 +101,8 @@ class MKVController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
             }
             
         })
+            
+        }
         
         
     }
@@ -169,15 +174,40 @@ class MKVController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     
     
     
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+        
+        let planeTitle = marker.title
+        let message = marker.userData[4]
+        
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewControllerWithIdentifier("readPlaneID") as! readPlaneController
+            
+            controller.planeTitle = planeTitle
+            controller.message = message as! String
+            
+            self.presentViewController(controller, animated: true, completion: nil)
+
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     
     func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
         // 1
         let title = marker.title
+        let message = marker.userData[4]
         let user = marker.snippet
         let kilometer = "82 KM away"
         // 2
         let customInfoWindow = NSBundle.mainBundle().loadNibNamed("CustomInfoWindow", owner: self, options: nil)[0] as! CustomInfoWindow
-        customInfoWindow.architectLbl.text = title
+        customInfoWindow.architectLbl.text = String(message)
         customInfoWindow.completedYearLbl.text = user
         
         return customInfoWindow
@@ -277,5 +307,14 @@ func ** (base: Double, power: Double) -> Double {
 
 func ** (base: Float, power: Float) -> Float {
     return powf(base, power)
+}
+
+extension UIView {
+    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> UIView? {
+        return UINib(
+            nibName: nibNamed,
+            bundle: bundle
+            ).instantiateWithOwner(nil, options: nil)[0] as? UIView
+    }
 }
 
